@@ -1,0 +1,90 @@
+<h1 class="title"> {{coin.name}} #{{coin.market_cap_rank}}</h1>
+
+<div class="container">
+  <div *ngIf="toggler; else info" class="lds-circle">
+    <div></div>
+  </div>
+  <ng-template #info class="main">
+    <div class="main-info">
+      <div class="start" title="Coin name">
+        <img class="main-info__img" [src]="coin.image.large" alt="coin" width="50" height="50">
+        <span class="main-info__symbol">{{coin.symbol}}</span> 
+      </div>
+      <div class="middle" title="Price">
+        <span class="main-info__price">${{coin.market_data.current_price.usd}}</span>
+        <div class="main-info__progress">
+          <div>Low24h: <span class="bold">{{coin.market_data.low_24h.usd}}</span></div>
+          <mat-progress-bar mode="determinate" [value]="progress" class="progress"></mat-progress-bar>
+          <div>Max24h: <span class="bold">{{coin.market_data.high_24h.usd}}</span></div>
+        </div>
+        
+      </div>
+      <div class="end" title="CoinGecko rank">
+        <a [href]='coinGecko + coin.id' target="_blank">
+          <img
+            src="https://static.coingecko.com/s/coingecko-logo-white-ea42ded10e4d106e14227d48ea6140dc32214230aa82ef63d0499f9c1e109656.png"
+            alt="coinGecko"
+            width="200"
+          >
+          <span>#{{coin.coingecko_rank}}</span>
+        </a>
+      </div>
+    </div>
+
+    <table class="price-change">
+      <thead>
+        <tr>
+          <th colspan="5">Price Changes</th>
+        </tr>
+      </thead>
+      <tbody class="price-change__table table">
+        <tr class="table__row">
+          <th>1d</th>
+          <th>7d</th>
+          <th>14d</th>
+          <th>30d</th>
+          <th>1y</th>
+        </tr>
+        <tr class="table__row">
+          <td [ngClass]="{'red': coin.market_data.price_change_24h / coin.market_data.current_price.usd < 0, 'green':true}">
+            {{(coin.market_data.price_change_24h / coin.market_data.current_price.usd).toFixed(2)}}
+          </td>
+          <td [ngClass]="{'red': coin.market_data.price_change_percentage_7d < 0, 'green': true}">
+            {{coin.market_data.price_change_percentage_7d.toFixed(2)}}
+          </td>
+          <td [ngClass]="{'red': coin.market_data.price_change_percentage_14d < 0, 'green': true}">
+            {{coin.market_data.price_change_percentage_14d.toFixed(2)}}
+          </td>
+          <td [ngClass]="{'red': coin.market_data.price_change_percentage_30d < 0, 'green': true}">
+            {{coin.market_data.price_change_percentage_30d.toFixed(2)}}
+          </td>
+          <td [ngClass]="{'red': coin.market_data.price_change_percentage_1y < 0, 'green': true}">
+            {{coin.market_data.price_change_percentage_1y.toFixed(2)}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="info">
+      <div class="supply">
+        <h3 class="supply__title">Circulating Supply</h3>
+        <div class="supply__current">
+          <p>{{coin.market_data.circulating_supply}} {{coin.symbol}}</p>
+          <p>{{currentPercentSupply.toFixed(0)}}%</p>
+        </div>
+        
+        <mat-progress-bar mode="determinate" [value]="currentPercentSupply" class="progress"></mat-progress-bar>
+        <p>Total supply: {{coin.market_data.total_supply.toFixed(0) || '∞'}}</p>
+        <p>Max supply: {{coin.market_data.max_supply || '∞'}}</p>
+      </div>
+    </div>
+
+    <div class="about" *ngIf="coin.description.uk">
+      <h1 class="about__title">What is {{coin.name}} ({{coin.symbol}}) ?</h1>
+      <p class="about__description">
+        {{coin.description.uk}}
+      </p>
+    </div>
+
+  </ng-template>
+</div>

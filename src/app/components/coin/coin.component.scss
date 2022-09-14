@@ -1,0 +1,157 @@
+.container {
+  position: relative;
+  min-height: 1000px;
+  width: 1400px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #222628;
+  border: 1px solid #68686e;
+  color: white;
+}
+
+.title {
+  text-align: center;
+  color: white;
+  font-family: monospace;
+  font-size: 3em;
+  margin: 20px auto;
+}
+
+.main-info {
+  display: flex;
+  align-items: center;
+  font-size: 2em;
+
+  &__symbol {
+    text-transform: capitalize;
+  }
+
+  &__price {
+  }
+
+  &__progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    min-width: 400px;
+  }
+}
+
+.start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: calc(1400px / 3);
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  width: calc(1400px / 3);
+}
+
+.end {
+  display: flex;
+  justify-content: center;
+  width: calc(1400px / 3);
+  &>a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.price-change {
+  width: 50%;
+  border: 1px solid #68686e;
+  border-collapse: collapse;
+  margin: 80px auto;
+
+  & th {
+    border: 1px solid #68686e;
+    padding: 5px;
+  }
+
+  & td {
+    text-align: center;
+    border: 1px solid #68686e;
+    padding: 5px;
+  }
+}
+
+.info {
+  padding: 20px;
+  width: max-content;
+  border: 1px solid #68686e;
+}
+
+
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.progress {
+  width: 200px;
+}
+
+.bold {
+  font-size: 18px;
+}
+
+.about {
+  color: rgb(220, 220, 220);
+  &__title {
+
+  }
+
+  &__description {
+    line-height: 180%;
+  }
+}
+
+//LOADING
+.lds-circle {
+  display: inline-block;
+  transform: translateZ(1px);
+}
+.lds-circle > div {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  background: gold;
+  animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+@keyframes lds-circle {
+  0%, 100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+  }
+  100% {
+    transform: rotateY(3600deg);
+  }
+}
